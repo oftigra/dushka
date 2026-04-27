@@ -26,7 +26,7 @@ export function BugEasterEgg({ onBreakPage }: BugEasterEggProps) {
   return (
     <motion.button
       type="button"
-      className="fixed -right-2 bottom-24 z-40 flex h-20 w-20 items-center justify-center rounded-l-full border-4 border-[var(--foreground)] bg-[var(--panel-strong)] text-4xl shadow-[8px_8px_0_rgba(0,0,0,0.2)] transition hover:-translate-x-2 focus:outline-none focus:ring-4 focus:ring-[var(--accent-3)]"
+      className="fixed -right-2 bottom-20 z-40 flex h-14 w-14 items-center justify-center rounded-l-full border-[3px] border-[var(--foreground)] bg-[var(--panel-strong)] text-3xl shadow-[6px_6px_0_rgba(0,0,0,0.2)] transition hover:-translate-x-2 focus:outline-none focus:ring-4 focus:ring-[var(--accent-3)] sm:bottom-24 sm:h-20 sm:w-20 sm:border-4 sm:text-4xl sm:shadow-[8px_8px_0_rgba(0,0,0,0.2)]"
       onClick={handleClick}
       animate={isLoose ? path : { rotate: [0, 6, -6, 0] }}
       transition={
