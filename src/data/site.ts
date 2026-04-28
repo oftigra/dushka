@@ -116,10 +116,6 @@ export const contactLinks = [
     label: "Telegram",
     href: "https://t.me/",
   },
-  {
-    label: "CV",
-    href: "/cv",
-  },
 ];
 
 export const consoleMessages = [
