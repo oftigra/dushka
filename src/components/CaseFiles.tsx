@@ -5,7 +5,7 @@ import { qaCases, qaPipeline } from "@/data/site";
 
 export function CaseFiles() {
   return (
-    <section className="mx-auto w-full max-w-6xl px-5 py-10" id="cases">
+    <section className="mx-auto w-full max-w-6xl scroll-mt-24 px-5 pb-10 pt-16 sm:py-10" id="cases">
       <div className="mb-7 grid gap-4 lg:grid-cols-[0.9fr_1fr] lg:items-end">
         <div className="min-w-0">
           <p className="text-sm font-black uppercase tracking-[0.24em] text-[var(--accent-3)]">
@@ -53,7 +53,7 @@ export function CaseFiles() {
                 <span className="font-black text-[var(--foreground)]">Action:</span> {item.action}
               </p>
               </div>
-              <div className="min-h-32 rounded-2xl border-2 border-[var(--foreground)] bg-[var(--accent-2)]/25 p-3 text-[var(--foreground)] lg:min-h-[8.5rem]">
+              <div className="mt-3 min-h-32 rounded-2xl border-2 border-[var(--foreground)] bg-[var(--accent-2)]/25 p-3 text-[var(--foreground)] lg:mt-4 lg:min-h-[8.5rem]">
                 <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--accent-3)]">
                   result
                 </p>
