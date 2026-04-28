@@ -217,6 +217,10 @@ export function AppExperience() {
                     {link.label}
                   </button>
                 ))}
+                <p className="px-1 pt-1 text-xs font-black leading-5 opacity-65 sm:text-sm">
+                  CV нужен только если вы пришли без резюме. Если резюме уже видели - сразу
+                  в Telegram, баги не ждут.
+                </p>
               </div>
             </div>
           </div>

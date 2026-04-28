@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const salaryStates = [
   {
@@ -30,7 +30,26 @@ const salaryStates = [
 
 export function CompensationCheck() {
   const [level, setLevel] = useState(0);
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(() => new Set());
   const current = salaryStates[level];
+  const isCurrentImageLoaded = loadedImages.has(current.image);
+
+  useEffect(() => {
+    salaryStates.forEach(({ image }) => {
+      const preloader = new window.Image();
+      const markAsLoaded = () => {
+        setLoadedImages((images) => {
+          const nextImages = new Set(images);
+          nextImages.add(image);
+          return nextImages;
+        });
+      };
+
+      preloader.onload = markAsLoaded;
+      preloader.onerror = markAsLoaded;
+      preloader.src = image;
+    });
+  }, []);
 
   const increaseMotivation = () => {
     setLevel((currentLevel) => (currentLevel + 1) % salaryStates.length);
@@ -61,7 +80,7 @@ export function CompensationCheck() {
               {["DUSH-404", "Bug", "Needs offer"].map((item) => (
                 <span
                   key={item}
-                  className="rounded-full bg-[var(--foreground)] px-3 py-2 text-[0.68rem] font-black uppercase tracking-[0.12em] text-[var(--background)] sm:px-4 sm:text-xs sm:tracking-[0.16em]"
+                  className="cursor-default select-none rounded-full bg-[var(--foreground)] px-3 py-2 text-[0.68rem] font-black uppercase tracking-[0.12em] text-[var(--background)] sm:px-4 sm:text-xs sm:tracking-[0.16em]"
                 >
                   {item}
                 </span>
@@ -72,10 +91,10 @@ export function CompensationCheck() {
           <div className="grid min-w-0 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.82fr)]">
             <div className="min-w-0 rounded-[1.35rem] border-2 border-[var(--foreground)] bg-white/35 p-4 sm:rounded-[1.8rem] sm:p-6">
               <div className="mb-5 flex flex-wrap items-center gap-2">
-                <span className="rounded-full bg-[var(--foreground)] px-3 py-2 text-[0.68rem] font-black uppercase tracking-[0.12em] text-[var(--background)] sm:px-4 sm:text-xs sm:tracking-[0.16em]">
+                <span className="cursor-default select-none rounded-full bg-[var(--foreground)] px-3 py-2 text-[0.68rem] font-black uppercase tracking-[0.12em] text-[var(--background)] sm:px-4 sm:text-xs sm:tracking-[0.16em]">
                   Bug report
                 </span>
-                <span className="rounded-full border-2 border-[var(--foreground)] px-3 py-2 text-[0.68rem] font-black uppercase tracking-[0.12em] sm:px-4 sm:text-xs sm:tracking-[0.16em]">
+                <span className="cursor-default select-none rounded-full border border-[var(--foreground)]/25 bg-[var(--background)]/35 px-3 py-2 text-[0.68rem] font-black uppercase tracking-[0.12em] text-[var(--muted)] sm:px-4 sm:text-xs sm:tracking-[0.16em]">
                   Assignee: HR
                 </span>
               </div>
@@ -103,7 +122,7 @@ export function CompensationCheck() {
                 {["Severity: money", "Priority: asap", "Status: offer needed"].map((item) => (
                   <span
                     key={item}
-                    className="rounded-2xl border-2 border-[var(--foreground)] bg-[var(--panel-strong)] px-3 py-2 text-[0.68rem] font-black uppercase tracking-[0.08em] sm:text-xs sm:tracking-[0.12em]"
+                    className="cursor-default select-none rounded-2xl border border-[var(--foreground)]/20 bg-[var(--panel-strong)]/65 px-3 py-2 text-[0.68rem] font-black uppercase tracking-[0.08em] text-[var(--muted)] sm:text-xs sm:tracking-[0.12em]"
                   >
                     {item}
                   </span>
@@ -119,7 +138,7 @@ export function CompensationCheck() {
                   </p>
                   <h3 className="mt-3 text-xl font-black sm:text-2xl">Мотивация енота</h3>
                 </div>
-                <span className="rounded-full bg-[var(--foreground)] px-4 py-2 text-sm font-black text-[var(--background)]">
+                <span className="cursor-default select-none rounded-full bg-[var(--foreground)] px-4 py-2 text-sm font-black text-[var(--background)]">
                   {current.percent}%
                 </span>
               </div>
@@ -139,23 +158,32 @@ export function CompensationCheck() {
                 className="group relative mx-auto flex h-56 w-full max-w-72 shrink-0 items-center justify-center rounded-[2rem] border-4 border-[var(--foreground)] bg-white/20 shadow-[8px_8px_0_rgba(0,0,0,0.2)] transition hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-[var(--accent-3)] sm:h-64"
                 aria-label="Повысить мотивацию енота"
               >
-                <motion.div
-                  animate={{
-                    rotate: level === 2 ? [-2, 2, -2] : 0,
-                    scale: 1 + level * 0.035,
-                  }}
-                  transition={{ duration: 0.45 }}
-                >
-                  <Image
-                    src={current.image}
-                    alt={current.alt}
-                    width={240}
-                    height={240}
-                    unoptimized={current.image.endsWith(".gif")}
-                    className="h-44 w-44 object-contain drop-shadow-xl sm:h-52 sm:w-52"
-                    priority={false}
-                  />
-                </motion.div>
+                {isCurrentImageLoaded ? (
+                  <motion.div
+                    key={current.image}
+                    initial={{ opacity: 0, scale: 0.96 }}
+                    animate={{
+                      opacity: 1,
+                      rotate: level === 2 ? [-2, 2, -2] : 0,
+                      scale: 1 + level * 0.035,
+                    }}
+                    transition={{ duration: 0.28 }}
+                  >
+                    <Image
+                      src={current.image}
+                      alt={current.alt}
+                      width={240}
+                      height={240}
+                      unoptimized={current.image.endsWith(".gif")}
+                      className="h-44 w-44 object-contain drop-shadow-xl sm:h-52 sm:w-52"
+                      priority={level === 0}
+                    />
+                  </motion.div>
+                ) : (
+                  <div className="flex h-44 w-44 items-center justify-center rounded-[1.5rem] border-2 border-dashed border-[var(--foreground)]/40 bg-[var(--panel-strong)]/70 text-center text-xs font-black uppercase tracking-[0.14em] text-[var(--muted)] sm:h-52 sm:w-52">
+                    loading raccoon
+                  </div>
+                )}
               </button>
 
               <div className="flex h-56 min-w-0 flex-col rounded-[1.5rem] border-2 border-[var(--foreground)] bg-[var(--panel-strong)] p-4 sm:h-52">

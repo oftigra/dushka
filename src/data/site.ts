@@ -61,7 +61,7 @@ export const skillCards = [
 export const qaCases = [
   {
     id: "SIL4-404",
-    title: "Train logic did not blink",
+    title: "SIL4 requirements risk",
     context: "Safety-critical логика беспилотного поезда.",
     bug: "Требования могли расходиться со сложной бизнес-логикой.",
     action: "Собрал decision tables и закрыл критичные сценарии до аудита.",
@@ -70,7 +70,7 @@ export const qaCases = [
   },
   {
     id: "PAY-200",
-    title: "Stripe wanted adult supervision",
+    title: "Stripe release risk",
     context: "Платежи, мобильные приложения и AWS.",
     bug: "Stripe и мобильный релиз могли привезти критичные сюрпризы.",
     action: "Проверил Stripe API, TestFlight/Play Console и AWS-окружение.",
@@ -79,7 +79,7 @@ export const qaCases = [
   },
   {
     id: "REG-030",
-    title: "Regression time got nerfed",
+    title: "Regression time cut",
     context: "Регресс и автотесты в релизном цикле.",
     bug: "Ручной регресс съедал время и прятал релизные риски.",
     action: "Поднял автотесты, отчеты и ежедневные прогоны.",
@@ -115,10 +115,6 @@ export const contactLinks = [
   {
     label: "Telegram",
     href: "https://t.me/",
-  },
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/",
   },
   {
     label: "CV",

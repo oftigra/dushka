@@ -29,7 +29,7 @@ export function ThemeSwitch({ isTransitioning, transitionMode, onToggle }: Theme
       <button
         type="button"
         onClick={onToggle}
-        className="comic-border fixed right-4 top-4 z-50 rounded-full bg-[var(--panel-strong)] px-4 py-3 text-sm font-black uppercase tracking-[0.18em] transition hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-[var(--accent)]"
+        className="comic-border fixed right-3 top-3 z-50 rounded-full bg-[var(--panel-strong)] px-3 py-2 text-[0.68rem] font-black uppercase tracking-[0.12em] transition hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-[var(--accent)] sm:right-4 sm:top-4 sm:px-4 sm:py-3 sm:text-sm sm:tracking-[0.18em]"
         aria-label="Переключить тему день или ночь"
       >
         <span className="theme-label-night">Night.exe</span>

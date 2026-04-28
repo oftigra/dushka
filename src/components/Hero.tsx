@@ -73,7 +73,7 @@ export function Hero({ onContactClick }: HeroProps) {
             {qaInventory.map((item) => (
               <span
                 key={item}
-                className="truncate rounded-full border-2 border-[var(--foreground)] bg-[var(--panel-strong)] px-2.5 py-1.5 text-center text-[0.6rem] font-black uppercase tracking-[0.06em] shadow-[3px_3px_0_rgba(0,0,0,0.12)] sm:px-3 sm:text-[0.68rem] sm:tracking-[0.1em]"
+                className="cursor-default select-none truncate rounded-full border border-[var(--foreground)]/18 bg-[var(--panel-strong)]/70 px-2.5 py-1.5 text-center text-[0.6rem] font-black uppercase tracking-[0.06em] text-[var(--muted)] sm:px-3 sm:text-[0.68rem] sm:tracking-[0.1em]"
                 title={item}
               >
                 {item}
@@ -105,10 +105,10 @@ export function Hero({ onContactClick }: HeroProps) {
               </div>
             </div>
             <div className="flex flex-row flex-wrap items-start gap-2 sm:flex-col sm:items-end">
-              <span className="rounded-full bg-[var(--foreground)] px-3 py-2 text-xs font-black text-[var(--background)] sm:px-4 sm:text-sm">
+              <span className="cursor-default select-none rounded-full bg-[var(--foreground)] px-3 py-2 text-xs font-black text-[var(--background)] sm:px-4 sm:text-sm">
                 QA ready
               </span>
-              <span className="-rotate-3 rounded-full border-2 border-[var(--foreground)] bg-[var(--accent-3)] px-3 py-2 text-xs font-black text-white shadow-[4px_4px_0_rgba(0,0,0,0.18)] sm:px-4 sm:text-sm">
+              <span className="cursor-default select-none rounded-full border border-white/25 bg-[var(--accent-3)] px-3 py-2 text-xs font-black text-white sm:px-4 sm:text-sm">
                 4Y+ QA
               </span>
             </div>
