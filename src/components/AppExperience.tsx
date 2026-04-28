@@ -1,8 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useState } from "react";
 import { BugEasterEgg } from "@/components/BugEasterEgg";
+import { CaseFiles } from "@/components/CaseFiles";
 import { CompensationCheck } from "@/components/CompensationCheck";
 import { FooterMeme } from "@/components/FooterMeme";
 import { Hero } from "@/components/Hero";
@@ -22,6 +23,7 @@ export function AppExperience() {
   const [transitionMode, setTransitionMode] = useState<ThemeTransitionMode>("to-night");
   const [lockerTarget, setLockerTarget] = useState<LockerTarget | null>(null);
   const [isBroken, setIsBroken] = useState(false);
+  const [expandedSkill, setExpandedSkill] = useState<string | null>(null);
 
   useEffect(() => {
     consoleMessages.forEach((message, index) => {
@@ -100,15 +102,93 @@ export function AppExperience() {
                 viewport={{ once: true, amount: 0.25 }}
                 transition={{ delay: index * 0.06 }}
               >
-                <span className="mb-5 inline-flex rounded-full border border-[var(--foreground)]/20 bg-[var(--background)]/70 px-3 py-1.5 text-xs font-black uppercase tracking-[0.14em] text-[var(--foreground)]">
-                  {card.tag}
-                </span>
+                <div className="flex items-start justify-between gap-4">
+                  <span className="mb-5 inline-flex rounded-full border border-[var(--foreground)]/20 bg-[var(--background)]/70 px-3 py-1.5 text-xs font-black uppercase tracking-[0.14em] text-[var(--foreground)]">
+                    {card.tag}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setExpandedSkill((current) => (current === card.title ? null : card.title))}
+                    className="rounded-full border border-[var(--foreground)]/20 bg-[var(--panel-strong)] px-3 py-1.5 text-xs font-black uppercase tracking-[0.12em] transition hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-[var(--accent)]"
+                    aria-expanded={expandedSkill === card.title}
+                  >
+                    {expandedSkill === card.title ? "hide" : "details"}
+                  </button>
+                </div>
                 <h3 className="text-xl font-black sm:text-2xl">{card.title}</h3>
                 <p className="mt-4 leading-7 text-[var(--muted)]">{card.text}</p>
+
+                <AnimatePresence initial={false}>
+                  {expandedSkill === card.title ? (
+                    <motion.div
+                      className="mt-5 space-y-4 overflow-hidden rounded-[1.2rem] border-2 border-[var(--foreground)] bg-[var(--panel-strong)] p-4"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.24 }}
+                    >
+                      <div>
+                        <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--accent-3)]">
+                          tools
+                        </p>
+                        <div className="mt-2 flex flex-wrap gap-2">
+                          {card.tools.map((tool) => (
+                            <span
+                              key={tool}
+                              className="rounded-full bg-[var(--background)] px-3 py-1.5 text-xs font-black"
+                            >
+                              {tool}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="grid gap-3 sm:grid-cols-2">
+                        <div>
+                          <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--muted)]">
+                            checks
+                          </p>
+                          <ul className="mt-2 space-y-1 text-sm font-black text-[var(--foreground)]">
+                            {card.checks.map((item) => (
+                              <li key={item}>/ {item}</li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div>
+                          <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--muted)]">
+                            artifacts
+                          </p>
+                          <ul className="mt-2 space-y-1 text-sm font-black text-[var(--foreground)]">
+                            {card.artifacts.map((item) => (
+                              <li key={item}>/ {item}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                      <div className="rounded-2xl bg-[var(--background)]/70 p-3">
+                        <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--accent-3)]">
+                          AI kit
+                        </p>
+                        <p className="mt-2 text-sm leading-6 text-[var(--muted)]">{card.aiNote}</p>
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          {card.aiKit.map((item) => (
+                            <span
+                              key={item}
+                              className="rounded-full border border-[var(--foreground)]/20 px-3 py-1 text-xs font-black"
+                            >
+                              {item}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  ) : null}
+                </AnimatePresence>
               </motion.article>
             ))}
           </div>
         </section>
+
+        <CaseFiles />
 
         <section className="mx-auto w-full max-w-6xl px-5 py-10" id="contact">
           <div className="comic-border overflow-hidden rounded-[2.4rem] bg-[var(--foreground)] text-[var(--background)]">

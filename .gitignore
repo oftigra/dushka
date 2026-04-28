@@ -24,5 +24,8 @@ pnpm-debug.log*
 # vercel
 .vercel
 
+# private resume source
+public/Ivan.html
+
 # typescript
 *.tsbuildinfo
