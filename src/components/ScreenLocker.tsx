@@ -13,6 +13,7 @@ type ScreenLockerProps = {
 export function ScreenLocker({ isOpen, targetLabel, targetHref, onClose }: ScreenLockerProps) {
   const [secondsLeft, setSecondsLeft] = useState(13);
   const isExpired = secondsLeft === 0;
+  const isPetProjectsTarget = targetHref === "/pet-projects";
 
   useEffect(() => {
     if (!isOpen) {
@@ -24,16 +25,33 @@ export function ScreenLocker({ isOpen, targetLabel, targetHref, onClose }: Scree
     }, 1000);
 
     const onKeyDown = (event: KeyboardEvent) => {
+      const key = event.key.toLowerCase();
+      const isDevToolsShortcut =
+        event.key === "F12" ||
+        ((event.ctrlKey || event.metaKey) && event.shiftKey && ["i", "j", "c"].includes(key)) ||
+        ((event.ctrlKey || event.metaKey) && key === "u");
+
+      if (isDevToolsShortcut) {
+        event.preventDefault();
+        event.stopPropagation();
+        return;
+      }
+
       if (event.key === "Escape") {
         onClose();
       }
     };
+    const onContextMenu = (event: MouseEvent) => {
+      event.preventDefault();
+    };
 
-    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("keydown", onKeyDown, true);
+    window.addEventListener("contextmenu", onContextMenu, true);
 
     return () => {
       window.clearInterval(timer);
-      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("keydown", onKeyDown, true);
+      window.removeEventListener("contextmenu", onContextMenu, true);
     };
   }, [isOpen, onClose]);
 
@@ -50,7 +68,7 @@ export function ScreenLocker({ isOpen, targetLabel, targetHref, onClose }: Scree
     <AnimatePresence>
       {isOpen ? (
         <motion.div
-          className="fixed inset-0 z-40 flex items-center justify-center bg-black/80 p-4 text-white"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4 text-white"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -69,7 +87,13 @@ export function ScreenLocker({ isOpen, targetLabel, targetHref, onClose }: Scree
               {isExpired ? "qa verdict" : "screen locker joke"}
             </p>
             <h2 id="screen-locker-title" className="font-display text-3xl leading-tight sm:text-5xl">
-              {isExpired ? "Bug #404: интервью не началось." : `У вас есть ${secondsLeft} сек. пригласить меня на интервью`}
+              {isExpired
+                ? isPetProjectsTarget
+                  ? "Bug #404: секретный раздел не открылся."
+                  : "Bug #404: интервью не началось."
+                : isPetProjectsTarget
+                  ? `У вас есть ${secondsLeft} сек. открыть секретный раздел`
+                  : `У вас есть ${secondsLeft} сек. пригласить меня на интервью`}
             </h2>
             {isExpired ? (
               <div className="mt-5 max-w-xl space-y-2 text-lg text-white/78">
