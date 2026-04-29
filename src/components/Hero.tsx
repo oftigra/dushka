@@ -47,7 +47,7 @@ export function Hero({ onContactClick }: HeroProps) {
         >
           <button
             type="button"
-            onClick={() => onContactClick("Telegram", "https://t.me/")}
+            onClick={() => onContactClick("Telegram", "/telegram")}
             className="button-hover comic-border rounded-full bg-[var(--accent-3)] px-6 py-4 text-sm font-black uppercase tracking-[0.14em] text-white focus:outline-none focus:ring-4 focus:ring-[var(--accent)] sm:px-7 sm:text-base sm:tracking-[0.16em]"
           >
             Позвать на интервью

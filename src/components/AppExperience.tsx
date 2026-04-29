@@ -88,7 +88,7 @@ export function AppExperience() {
               <h2 className="font-display mt-3 text-4xl sm:text-6xl">Что тестирую</h2>
             </div>
             <p className="max-w-md text-[var(--muted)]">
-              Карточки без лута, но с пользой: что можно доверить QA, пока жук не убежал в прод.
+              Карточки без лута, но с пользой: что можно доверить QA, пока BUG не убежал в прод.
             </p>
           </div>
 
@@ -243,7 +243,7 @@ export function AppExperience() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#050505]/90 p-5 text-white">
           <div className="comic-border max-w-2xl rounded-[2rem] bg-[#111] p-7 text-center">
             <p className="font-display text-7xl text-[#45ff94]">404</p>
-            <h2 className="mt-4 text-3xl font-black">Жук дополз до прода</h2>
+            <h2 className="mt-4 text-3xl font-black">BUG дополз до прода</h2>
             <p className="mt-4 text-white/70">
               Страница держалась достойно, но баг оказался настойчивее. Refresh лечит, но не учит.
             </p>

@@ -34,8 +34,8 @@ export function BugEasterEgg({ onBreakPage }: BugEasterEggProps) {
           ? { duration: 2.4, ease: "easeInOut" }
           : { duration: 2, repeat: Infinity, repeatType: "mirror" }
       }
-      aria-label="Баг-жук. Нажмите, чтобы сломать страницу"
-      title="Не трогай баг"
+      aria-label="BUG. Нажмите, чтобы сломать страницу"
+      title="Не трогай BUG"
     >
       <span aria-hidden="true">🐞</span>
     </motion.button>

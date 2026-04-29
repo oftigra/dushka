@@ -9,7 +9,7 @@ export default function NotFound() {
           Эту страницу задушили до релиза
         </h1>
         <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-[var(--muted)]">
-          Возможно, ссылка ушла на собеседование, а возможно, баг-жук уже сделал свое дело.
+          Возможно, ссылка ушла на собеседование, а возможно, BUG уже сделал свое дело.
         </p>
         <Link
           href="/"

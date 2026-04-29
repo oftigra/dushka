@@ -8,6 +8,7 @@ export const qaInventory = [
   "Full-stack QA",
   "Mobile QA",
   "API",
+  "English B2",
   "AI-assisted QA",
 ];
 
@@ -114,7 +115,11 @@ export const qaPipeline = [
 export const contactLinks = [
   {
     label: "Telegram",
-    href: "https://t.me/",
+    href: "/telegram",
+  },
+  {
+    label: "Пет-проекты в карантине",
+    href: "/pet-projects",
   },
 ];
 

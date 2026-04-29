@@ -1,6 +1,6 @@
 # Душные идеи
 
-Simpson-style QA CV и мемный сайт-портфолио: ручное тестирование, автотесты, мобилки, day/night тема, Matrix-переход, screen locker, баг-жук, devtools-пасхалки и мемная 404.
+Simpson-style QA CV и мемный сайт-портфолио: ручное тестирование, автотесты, мобилки, day/night тема, Matrix-переход, screen locker, BUG, devtools-пасхалки и мемная 404.
 
 ## Запуск
 
