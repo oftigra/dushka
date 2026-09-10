@@ -12,6 +12,10 @@ build
 .DS_Store
 *.pem
 
+# agent tool artifacts
+.playwright-mcp
+.zcode
+
 # debug
 npm-debug.log*
 yarn-debug.log*

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Rubik_Mono_One } from "next/font/google";
 import Script from "next/script";
+import { SITE_URL, socialLinks } from "@/data/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -24,9 +25,45 @@ try {
 }
 `;
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://dushka.vercel.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? SITE_URL;
 const siteDescription =
   "QA-портфолио Ивана: ручное тестирование, автотесты, mobile QA, API, регресс и AI-assisted QA без стерильной корпоративщины.";
+
+const sameAs = Object.values(socialLinks).filter(Boolean);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      name: "Душные идеи",
+      url: siteUrl,
+      inLanguage: "ru",
+      description: siteDescription,
+    },
+    {
+      "@type": "Person",
+      "@id": `${siteUrl}/#person`,
+      name: "Иван",
+      alternateName: "Ivan",
+      jobTitle: "QA-инженер",
+      url: siteUrl,
+      knowsAbout: [
+        "Manual testing",
+        "Automation testing",
+        "Mobile QA",
+        "API testing",
+        "Regression testing",
+        "Playwright",
+        "Selenium",
+        "Postman",
+        "AI-assisted QA",
+      ],
+      ...(sameAs.length > 0 ? { sameAs } : {}),
+    },
+  ],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -106,6 +143,10 @@ export default function RootLayout({
           id="theme-init"
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: themeScript }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body className={`${inter.variable} ${rubikMono.variable}`}>

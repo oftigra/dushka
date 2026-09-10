@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "dushka.vercel.app" }],
+      "destination": "https://xn--80ahmmi9a9a.xn--90ais/:path*",
+      "permanent": true
+    }
+  ]
+}

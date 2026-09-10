@@ -1,3 +1,11 @@
+export const SITE_URL = "https://xn--80ahmmi9a9a.xn--90ais";
+
+export const socialLinks = {
+  github: "https://github.com/oftigra",
+  telegram: "",
+  linkedin: "",
+};
+
 export const heroLines = [
   "Душу баги на работе и дома.",
   "Ручное, автотесты, мобилки - багам не спрятаться.",

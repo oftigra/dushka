@@ -27,6 +27,9 @@ export function Hero({ onContactClick }: HeroProps) {
         >
           Душные
           <span className="block text-[var(--accent)]">идеи</span>
+          <span className="mt-3 block text-xs font-black uppercase tracking-[0.32em] text-[var(--foreground)] [font-family:var(--font-inter)] sm:mt-4 sm:text-sm sm:tracking-[0.42em]">
+            QA-инженер · 4+ года опыта
+          </span>
         </motion.h1>
 
         <motion.p
